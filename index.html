@@ -28,7 +28,7 @@
             --font-stack: Helvetica, Roboto, sans-serif;
         }
 
-        h1{
+        h1 {
             font-weight: normal;
             font-size: 36px;
         }
@@ -64,6 +64,11 @@
             -webkit-backdrop-filter: blur(10px);
 
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-links{
+            display: flex;
+            flex-direction: row;
         }
 
         .nav-links a {
@@ -349,7 +354,7 @@
             .profile-card {
                 flex-direction: column;
                 justify-content: center;
-                padding: 10%;
+                padding: 5%;
             }
 
             .top-decoration {
@@ -373,7 +378,8 @@
         <section class="rundown">
             <h1>Heyy, I'm <strong>Maggie Ma</strong> ☀️</h1>
             <p>A UI/UX designer based in Stockton California, working on building
-                intuitive, human centered digital experiences. Currently at <strong id="DNLink">DigitalNest</strong> ideating away in a little corner
+                intuitive, human centered digital experiences. Currently at <strong id="DNLink">DigitalNest</strong>
+                ideating away in a little corner
                 with my laptop and some rice crackers >:D </p>
         </section>
         <header class="profile-card">
@@ -491,29 +497,37 @@
     </main>
 
     <script>
-        function reactiveMovement(el, maxX, maxY) {
-            window.addEventListener("pointermove", (e) => {
-                const { clientX, clientY } = e;
-                const { innerWidth, innerHeight } = window;
+        (function () {
+            console.log('running js');
+            const DigitalNest = document.getElementById("DNLink");
 
-                const xPerc = clientX / innerWidth;
-                const yPerc = clientY / innerHeight;
+            function reactiveMovement(el, maxX, maxY) {
+                window.addEventListener("pointermove", (e) => {
+                    const { clientX, clientY } = e;
+                    const { innerWidth, innerHeight } = window;
 
-                const moveX = (maxX * xPerc) - (maxX / 2);
-                const moveY = (maxY * yPerc) - (maxY / 2);
+                    const xPerc = clientX / innerWidth;
+                    const yPerc = clientY / innerHeight;
 
-                // FIX: We add calc() to keep the -50% centering from your CSS
-                el.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+                    const moveX = (maxX * xPerc) - (maxX / 2);
+                    const moveY = (maxY * yPerc) - (maxY / 2);
+
+                    // FIX: We add calc() to keep the -50% centering from your CSS
+                    el.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+                });
+            }
+
+            // Apply parallax effect to every "move" layer
+            document.querySelectorAll(".move").forEach((layer, index) => {
+                const intensity = 20 - index * 3;
+                reactiveMovement(layer, intensity, intensity);
             });
-        }
 
-        // Apply parallax effect to every "move" layer
-        document.querySelectorAll(".move").forEach((layer, index) => {
-            const intensity = 20 - index * 3;
-            reactiveMovement(layer, intensity, intensity);
-        });
+            DigitalNest.addEventListener("click", function (event) {
+                window.open('https://digitalnest.org/', '_blank');
+            });
 
-        document.addEventListener
+        })();
     </script>
 </body>
 
