@@ -24,7 +24,8 @@
             --transition-behavior-out: transform 0.3s ease-in-out;
             --transition-behavior-in: transform 0.2s ease-in-out;
             --transform-behavior: scale(1.03);
-
+            --outline-color: 1px solid #eee;
+            --card-background-color: #ffffff;
             --font-stack: Helvetica, Roboto, sans-serif;
         }
 
@@ -115,7 +116,7 @@
             max-width: 700px;
             align-items: center;
             justify-content: space-between;
-            border: 1px solid #eee;
+            border: var(--outline-color);
 
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
