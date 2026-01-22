@@ -31,7 +31,9 @@
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
-            const emoji = isDark ? '🌙' : '☀️';
+
+            const newSrc = isDark ? 'images/darkmode.svg' : 'images/lightmode.svg';
+            const newAlt = isDark ? 'darkmode' : 'lightmode';
 
             [themeIcon, headIcon].forEach(icon => {
                 if (icon) {
@@ -40,9 +42,16 @@
                     icon.style.opacity = "0";
 
                     setTimeout(() => {
-                        icon.textContent = emoji;
+                        if (icon.tagName === 'IMG') {
+                            icon.src = newSrc;
+                            icon.alt = newAlt;
+                        } else {
+                            icon.textContent = isDark ? '🌙' : '☀️';
+                        }
+
                         icon.style.opacity = "1";
                         icon.style.transform = "scale(1.2)";
+
                         setTimeout(() => {
                             icon.style.transform = "scale(1)";
                         }, 100);
@@ -59,4 +68,6 @@
             this.classList.add('active');
         });
     });
+
+    
 })();

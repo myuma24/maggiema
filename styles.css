@@ -1,24 +1,32 @@
 :root {
     --bg-color: #ffffff;
+    --sub-bg-color: #ffffff;
+    --darker-stroke-color: #dadada;
+    --avatar-background-color: #FCE5D9;
+    --h-font-color: #373737;
+    --p-font-color: #636363;
+
     --primary-color: #FB5081;
     --accent-color: #ffafaf3b;
-    --text-gray: #4C4C4C;
-
+    
     --glass-fill: rgba(255, 255, 255, 0.70);
     --stroke-color: #eee;
     --transition-behavior-out: transform 0.3s ease-in-out;
     --transition-behavior-in: transform 0.2s ease-in-out;
     --transform-behavior: scale(1.03);
-
     --font-stack: Helvetica, Roboto, sans-serif;
 }
 
 body.dark-mode {
-    --bg-color: #000000;
-    --sub-bg-color: #1f1f1f;
-    --text-gray: #f8f8f8;
-    --glass-fill: rgba(20, 20, 20, 0.75);
-    --stroke-color: rgba(255, 255, 255, 0.15);
+    --bg-color: #010408;
+    --sub-bg-color: #22282F;
+    --avatar-background-color: #725345;
+    --glass-fill: #3e444d5c;
+    --stroke-color: #3E444D;
+    --darker-stroke-color: #3E444D;
+
+    --h-font-color: #ffffff;
+    --p-font-color: #e0e0e0;
 }
 
 body.dark-mode .nav-background {
@@ -30,18 +38,23 @@ body.dark-mode .nav-background {
 h1 {
     font-weight: normal;
     font-size: 36px;
+    color: var(--h-font-color);
+}
+
+h2, h3  {
+    color: var(--h-font-color);
 }
 
 p {
     line-height: 160%;
     font-size: 16px;
+    color: var(--p-font-color);
 }
 
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     margin: 0;
-    color: var(--text-gray);
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
@@ -49,10 +62,13 @@ body {
 #header-icon {
     transition: opacity 0.3s ease-in-out;
     display: inline-block;
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
 }
 
-/* Navbar */
 
+/* Navbar */
 
 .nav-container {
     position: fixed;
@@ -92,7 +108,7 @@ body {
 }
 
 .circle-btn {
-    width: 55px;
+    width: 54px;
     height: 100%;
     border: none;
     background: none;
@@ -128,14 +144,14 @@ body {
 .play-link a {
     text-decoration: none;
     transition: color 0.3s ease;
-    color: var(--text-gray);
+    color: var(--p-font-color);
     font-family: var(--font-stack);
     font-size: 16px;
 }
 
 .nav-link {
     text-decoration: none;
-    color: var(--text-gray);
+    color: var(--p-font-color);
     font-size: 0.9rem;
     font-family: var(--font-stack);
     position: relative;
@@ -174,7 +190,7 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 10px;
     max-width: 800px;
     margin: 75px auto;
     padding: 20px;
@@ -182,10 +198,9 @@ body {
 
 #DNLink {
     color: var(--primary-color);
+    background-color: var(--accent-color);
     border-radius: 999px;
     padding: 5px 10px 5px 10px;
-
-    background-color: var(--accent-color);
     font-size: 16px;
 }
 
@@ -201,14 +216,17 @@ body {
     max-width: 700px;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid #eee;
-    background-color: var(--bg-color);
 
+    border: 1px solid var(--stroke-color);
+    background-color: var(--sub-bg-color);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: border 0.5s ease, color 0.5s ease;
 }
 
 #avatar-root {
-    background: #FCE5D9;
+    background: var(--avatar-background-color);
     border-radius: 30px;
     border: 1px solid #ffafaf;
 }
@@ -216,9 +234,7 @@ body {
 .avatar {
     position: relative;
     width: 300px;
-    /* Increase this to scale up! */
     aspect-ratio: 3 / 4;
-    /* Preserves the correct shape */
 }
 
 .avatar img {
@@ -227,7 +243,6 @@ body {
     width: auto;
     left: 50%;
     top: 50%;
-    /* This handles the initial centering before the mouse moves */
     transform: translate(-50%, -50%);
 }
 
@@ -245,7 +260,6 @@ body {
 /* Avatar Image Wrapper */
 .avatar-container {
     flex: 0 0 40%;
-    /* Keeps the image box at a fixed proportion */
 }
 
 /* Details Section */
@@ -259,7 +273,6 @@ body {
     right: 0;
     padding: 15px 0;
     text-align: right;
-    /* img behaves like text so aligning text will align the img to the right */
 }
 
 .top-decoration img {
@@ -274,25 +287,24 @@ body {
     justify-content: space-between;
     align-items: baseline;
     padding: 15px 0;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--darker-stroke-color);
     /* The thin separator lines */
 }
 
 .info-row:last-child {
     border-bottom: none;
-    /* No line under the last row */
 }
 
 .label {
     font-size: 12px;
     letter-spacing: 1px;
-    color: #666666;
+    color: var(--p-font-color);
     font-weight: 600;
 }
 
 .value {
     font-size: 18px;
-    color: #333;
+    color: var(--h-font-color);
 }
 
 .value.bold {
@@ -301,7 +313,7 @@ body {
 
 .value.italic {
     font-style: italic;
-    color: #777;
+    color: var(--h-font-color);
     font-weight: 300;
 }
 
@@ -327,8 +339,8 @@ body {
 
 
 .project-card {
-    background: #fff;
-    border: 1px solid #eee;
+    background: var(--sub-bg-color);
+    border: 1px solid var(--stroke-color);
     border-radius: 20px;
     padding: 25px;
     text-align: left;
@@ -357,8 +369,8 @@ body {
 }
 
 .tags span {
-    background: var(--accent-color);
     color: var(--primary-color);
+    background-color: var(--accent-color);
     padding: 4px 12px;
     border-radius: 15px;
     font-size: 0.8rem;
@@ -373,7 +385,6 @@ body {
     border-radius: 20px;
     margin-bottom: 20px;
     overflow: hidden;
-    /* Keeps the preview box corners rounded */
     align-items: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     transition: var(--transition-behavior-out);
@@ -387,7 +398,6 @@ body {
 
 .explore-preview {
     flex: 0 0 40%;
-    /* Keeps the image box at 40% width */
     height: 180px;
     display: flex;
     justify-content: center;
@@ -397,12 +407,10 @@ body {
 
 .dark-bg {
     background-color: #1a1a1c;
-    /* Matches the dark background in your image */
 }
 
 .explore-preview img {
     height: 90%;
-    /* Scales the mobile mockups inside */
     object-fit: contain;
 }
 
@@ -429,7 +437,6 @@ body {
     text-align: left;
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
     .explore-item {
         flex-direction: column;
