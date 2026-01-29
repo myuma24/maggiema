@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="styles.css">
@@ -20,27 +20,27 @@
     <nav class="nav-container">
         <div class="nav-background"></div>
         <div class="nav-content">
-            <button class="circle-btn" id="theme-toggle"><img src="images/lightmode.svg" alt="lightmode" id= "theme-icon"></button>
+            <button class="circle-btn" id="theme-toggle"><img src="images/lightmode.svg" alt="lightmode"
+                    id="theme-icon"></button>
             <div class="pill-area">
-                <a href="#" class="nav-link active">Home</a>
+                <a href="#home" class="nav-link active">Home</a>
                 <a href="#work" class="nav-link">Work</a>
                 <a href="#explore" class="nav-link">Explore</a>
                 <a href="#about" class="nav-link">About</a>
             </div>
             <div class="play-link">
-                <a href="#" >Play</a>
+                <a href="#play" class="nav-link">Play</a>
             </div>
-
         </div>
     </nav>
 
     <main class="container">
-        <section class="rundown">
+        <section class="rundown" id="home">
             <h1>Heyy, I'm <strong>Maggie Ma</strong> <span id="header-icon">☀️</span></h1>
             <p>A UI/UX designer based in Stockton California, working on building
                 intuitive, human centered digital experiences. Currently at <strong id="DNLink">DigitalNest</strong>
                 ideating away in a little corner
-                with my laptop and some rice crackers >:D </p>
+                with my laptop and rice crackers >:D </p>
         </section>
         <header class="profile-card">
             <div class="avatar-container">
@@ -65,7 +65,7 @@
                 <div class="info-table">
                     <div class="info-row">
                         <span class="label">NAME:</span>
-                        <span class="value bold">Maggie Ma</span>
+                        <span class="value bold">MAGGIE MA</span>
                     </div>
                     <div class="info-row">
                         <span class="label">TITLE:</span>
@@ -88,71 +88,135 @@
                 </div>
             </div>
         </header>
-
-        <section class="work">
-            <h2>work</h2>
+        <section class="work" id="work">
+            <h2>Project Showcase</h2>
             <div class="grid">
+
                 <div class="project-card">
-                    <img src="images/hubbble.png" alt="Hubbble">
-                    <h3>Hubbble</h3>
-                    <p>First Place Winning Design: Platform for networking, community-building, and personal growth.</p>
-                    <div class="tags">
-                        <span>Adobe CC</span>
-                        <span>Procreate</span>
+                    <img src="images/hubbble.png" alt="AggieRewards">
+                    <div class="project-card-details">
+                        <h3>Hubbble</h3>
+                        <span class="date">November 2023</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.
+                        </p>
                     </div>
+                    <div class="tags">
+                        <span>UI/UX</span>
+                        <span>Product Design</span>
+                        <span>Adobe CC</span>
+                        <span>Figma</span>
+                    </div>
+                    <button class="project-button">Case Study <img src="images/arrow.svg" alt="button-icon"></button>
+                </div>
+
+                <div class="project-card">
+                    <div class="profile-card-img">
+                        <img src="images/aggierewards.png" alt="AggieRewards">
+                    </div>
+                    <div class="project-card-details">
+                        <h3>Flora</h3>
+                        <span class="date">January 2026</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.
+                        </p>
+                    </div>
+                    <div class="tags">
+                        <span>UI/UX</span>
+                        <span>Product Design</span>
+                        <span>Adobe CC</span>
+                        <span>Figma</span>
+                    </div>
+                    <button class="project-button">Case Study <img src="images/arrow.svg" alt="button-icon"></button>
                 </div>
 
                 <div class="project-card">
                     <img src="images/aggierewards.png" alt="AggieRewards">
-                    <h3>AggieRewards</h3>
-                    <p>Lorem IspLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua.</p>
-                    <div class="tags">
-                        <span>Adobe CC</span>
-                        <span>Procreate</span>
+                    <div class="project-card-details">
+                        <h3>AggieRewards</h3>
+                        <span class="date">November 2023</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.
+                        </p>
                     </div>
-                </div>
-                <div class="project-card">
-                    <img src="images/foodix.png" alt="Foodix">
-                    <h3>AggieRewards</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
                     <div class="tags">
+                        <span>UI/UX</span>
+                        <span>Product Design</span>
                         <span>Adobe CC</span>
-                        <span>Procreate</span>
-                        <span>Procreate</span>
-                        <span>Procreate</span>
+                        <span>Figma</span>
                     </div>
+                    <button class="project-button">Case Study <img src="images/arrow.svg" alt="button-icon"></button>
                 </div>
 
                 <div class="project-card">
-                    <img src="images/seledon.png" alt="Seledon">
-                    <h3>Seledon Literacy Program</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                    <div class="tags">
-                        <span>Adobe CC</span>
-                        <span>Procreate</span>
+                    <img src="images/aggierewards.png" alt="AggieRewards">
+                    <div class="project-card-details">
+                        <h3>AggieRewards</h3>
+                        <span class="date">November 2023</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.
+                        </p>
                     </div>
+                    <div class="tags">
+                        <span>UI/UX</span>
+                        <span>Product Design</span>
+                        <span>Adobe CC</span>
+                        <span>Figma</span>
+                    </div>
+                    <button class="project-button">Case Study <img src="images/arrow.svg" alt="button-icon"></button>
                 </div>
+
             </div>
         </section>
-
-        <section class="explore">
-            <h2>explore</h2>
+        <section class="explore" id="explore">
+            <h2>Explore</h2>
 
             <div class="explore-item">
-                <div class="explore-preview dark-bg">
-                    <img src="design-previews.jpg" alt="Design Previews">
+                <div class="explore-preview">
+                    <img src="images/aggierewards.png" alt="Design Previews">
                 </div>
                 <div class="explore-content">
                     <h3>Design</h3>
-                    <p>A collection of designs I've done that doesn't particularly have a case study but good enough to share.</p>
-                    <div class="tags">
+                    <p>A collection of designs I've done that doesn't particularly have a case study but good enough to
+                        share.</p>
+                    <div class="explore-tags">
                         <span>Adobe CC</span>
                         <span>Procreate</span>
                     </div>
+                    <button class="project-button">Explore<img src="images/arrow.svg" alt="button-icon"></button>
                 </div>
             </div>
 
+            <div class="explore-item">
+                <div class="explore-preview">
+                    <img src="images/aggierewards.png" alt="Design Previews">
+                </div>
+                <div class="explore-content">
+                    <h3>Design</h3>
+                    <p>A collection of designs I've done that doesn't particularly have a case study but good enough to
+                        share.</p>
+                    <div class="explore-tags">
+                        <span>Adobe CC</span>
+                        <span>Procreate</span>
+                    </div>
+                    <button class="project-button">Explore<img src="images/arrow.svg" alt="button-icon"></button>
+                </div>
+            </div>
+            <div class="explore-item">
+                <div class="explore-preview">
+                    <img src="images/aggierewards.png" alt="Design Previews">
+                </div>
+                <div class="explore-content">
+                    <h3>Design</h3>
+                    <p>A collection of designs I've done that doesn't particularly have a case study but good enough to
+                        share.</p>
+                    <div class="explore-tags">
+                        <span>Adobe CC</span>
+                        <span>Procreate</span>
+                    </div>
+                    <button class="project-button">Explore<img src="images/arrow.svg" alt="button-icon"></button>
+                </div>
+            </div>
         </section>
     </main>
 
