@@ -60,9 +60,8 @@
 
     const observerOptions = {
         root: null,
-        // Widened the detection area slightly for better cross-browser support
         rootMargin: "-20% 0px -50% 0px",
-        threshold: 0.1 // Triggers when 10% of the section is visible
+        threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries) => {

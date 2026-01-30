@@ -56,6 +56,7 @@ h1 {
     font-size: 36px;
     color: var(--h-font-color);
     font-family: "Google Sans", sans-serif;
+    letter-spacing: -1px;
 
 }
 
@@ -63,6 +64,7 @@ h2,
 h3 {
     color: var(--h-font-color);
     font-family: "Google Sans", sans-serif;
+    letter-spacing: -1px;
 }
 
 p {
@@ -549,13 +551,13 @@ p {
 .about-info {
     display: flex;
     flex-direction: row;
-    gap: 40px; 
+    gap: 40px;
     align-items: flex-start;
     margin-bottom: 40px;
 }
 
 .profile-image {
-    flex: 0 0 300px; 
+    flex: 0 0 300px;
     aspect-ratio: 3 / 4;
     border-radius: 20px;
     overflow: hidden;
@@ -568,7 +570,7 @@ p {
     object-fit: cover;
 }
 
-.about-info > div:last-child {
+.about-info>div:last-child {
     flex: 1;
 }
 
@@ -631,6 +633,78 @@ p {
     color: var(--p-font-color);
 }
 
+/* CASE STUDY CSS */
+
+.cs-header-light {
+    background-color: #ffffff;
+    padding: 140px 0 80px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cs-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--accent-orange);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.cs-title {
+    font-size: 3.5rem;
+    color: #000;
+    font-weight: 800;
+    margin: 15px 0 40px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+/* The big rounded container for your project image */
+.cs-hero-frame {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    background: linear-gradient(135deg, #fce5d9 0%, #f28d6d 100%);
+    /* Your brand colors */
+    border-radius: 40px;
+    /* Matching your profile card rounding */
+    margin-bottom: 60px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.cs-hero-frame img {
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 3-Column Grid Layout */
+.cs-summary-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+    padding-top: 40px;
+}
+
+.cs-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #999;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.cs-summary-grid p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+
 @media (max-width: 768px) {
 
     .grid {
@@ -668,5 +742,14 @@ p {
 
     .explore-content {
         margin-left: 25px;
+    }
+
+    .cs-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .cs-title {
+        font-size: 2.5rem;
     }
 }
