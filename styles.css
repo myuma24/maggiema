@@ -14,10 +14,16 @@
     --transition-behavior-out: transform 0.3s ease-in-out;
     --transition-behavior-in: transform 0.2s ease-in-out;
     --transform-behavior: scale(1.03);
-    --font-stack: Helvetica, Roboto, sans-serif;
-
     --tag-background: #eceef1;
     --tag-font: #000000;
+}
+
+
+body {
+    font-family: "Nunito Sans", sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body.dark-mode {
@@ -49,24 +55,20 @@ h1 {
     font-weight: normal;
     font-size: 36px;
     color: var(--h-font-color);
+    font-family: "Google Sans", sans-serif;
+
 }
 
 h2,
 h3 {
     color: var(--h-font-color);
+    font-family: "Google Sans", sans-serif;
 }
 
 p {
-    line-height: 160%;
+    line-height: 180%;
     font-size: 16px;
     color: var(--p-font-color);
-}
-
-body {
-    font-family: "Google Sans", sans-serif;
-    background-color: var(--bg-color);
-    margin: 0;
-    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 #theme-icon,
@@ -80,7 +82,6 @@ body {
 
 
 /* Navbar */
-
 .nav-container {
     position: fixed;
     top: 20px;
@@ -201,7 +202,7 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
     max-width: 800px;
     margin: 75px auto;
     padding: 20px;
@@ -300,7 +301,6 @@ body {
     align-items: baseline;
     padding: 15px 0;
     border-bottom: 1px solid var(--darker-stroke-color);
-    /* The thin separator lines */
 }
 
 .info-row:last-child {
@@ -343,13 +343,11 @@ body {
 }
 
 /* Work Grid */
-
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
-
 
 .project-card {
     background: var(--sub-bg-color);
@@ -544,6 +542,93 @@ body {
     unicode-bidi: bidi-override;
     direction: rtl;
     text-align: left;
+}
+
+/* Experience */
+
+.about-info {
+    display: flex;
+    flex-direction: row;
+    gap: 40px; 
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.profile-image {
+    flex: 0 0 300px; 
+    aspect-ratio: 3 / 4;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--stroke-color);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-info > div:last-child {
+    flex: 1;
+}
+
+.about-info p {
+    color: var(--p-font-color);
+}
+
+.skills-container {
+    margin: 10px 0;
+}
+
+.experience-item {
+    border-bottom: 1px solid var(--stroke-color);
+    padding-bottom: 25px;
+    margin-bottom: 20px;
+    transition: var(--transition-behavior-out);
+}
+
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.exp-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.exp-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: var(--avatar-background-color);
+    object-fit: cover;
+}
+
+.exp-title {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--h-font-color);
+}
+
+.exp-company {
+    color: var(--p-font-color);
+    font-size: 0.9rem;
+}
+
+.exp-date {
+    font-size: 0.85rem;
+    color: var(--p-font-color);
+}
+
+.exp-description {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    color: var(--p-font-color);
 }
 
 @media (max-width: 768px) {
