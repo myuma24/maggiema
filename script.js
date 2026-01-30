@@ -8,6 +8,15 @@
     
     let isScrolling = false;
 
+    window.addEventListener('scroll', () => {
+        if (isScrolling) return; 
+        if (window.scrollY < 50) {
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#home');
+            });
+        }
+    });
+
     function reactiveMovement(el, maxX, maxY) {
         window.addEventListener("pointermove", (e) => {
             const { clientX, clientY } = e;
@@ -51,8 +60,9 @@
 
     const observerOptions = {
         root: null,
-        rootMargin: "-30% 0px -60% 0px",
-        threshold: 0
+        // Widened the detection area slightly for better cross-browser support
+        rootMargin: "-20% 0px -50% 0px",
+        threshold: 0.1 // Triggers when 10% of the section is visible
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -70,38 +80,34 @@
 
     sections.forEach((section) => observer.observe(section));
 
-navLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-        const targetId = this.getAttribute('href');
-        if (targetId && targetId.startsWith('#')) {
-            e.preventDefault();
-            
-            isScrolling = true;
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                e.preventDefault();
+                
+                isScrolling = true;
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
 
-            // Specific check for Home
-            if (targetId === '#home') {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            } else {
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
+                if (targetId === '#home') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
-            }
 
-            setTimeout(() => {
-                isScrolling = false;
-            }, 1000);
-        }
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 1000);
+            }
+        });
     });
-});
 })();
 
 // (function () {
