@@ -35,13 +35,14 @@
     </nav>
 
     <main class="container">
-        <section class="rundown" id="home">
+        <section class="rundown" id="home" data-section="home">
             <h1>Heyy, I'm <strong>Maggie Ma</strong> <span id="header-icon">☀️</span></h1>
             <p>A UI/UX designer based in Stockton California, working on building
-                intuitive, human centered digital experiences. Currently at <strong id="DNLink">DigitalNest</strong>
-                ideating away in a little corner with my laptop and rice crackers c:</p>
+                intuitive, human centered digital experiences. Currently at <a id="DNLink"
+                    href="https://digitalnest.org" target="_blank" rel="noopener noreferrer">
+                    DigitalNest</a> ideating away in a little corner with my laptop and rice crackers c:</p>
         </section>
-        <header class="profile-card">
+        <header class="profile-card" data-section="home">
             <div class="avatar-container">
                 <div id="avatar-root">
                     <div class="avatar">
@@ -87,7 +88,7 @@
                 </div>
             </div>
         </header>
-        <section class="work" id="work">
+        <section class="work" id="work" data-section="work">
             <h1>Work</h1>
             <div class="grid">
 
@@ -106,7 +107,9 @@
                         <span>Adobe CC</span>
                         <span>Figma</span>
                     </div>
-                    <button class="project-button">Case Study <img src="images/arrow.svg" alt="button-icon"></button>
+                    <a class="project-button" href="hubbble.html">Case Study <img src="images/arrow.svg"
+                            alt="button-icon"></a>
+
                 </div>
 
                 <div class="project-card">
@@ -126,7 +129,8 @@
                         <span>Adobe CC</span>
                         <span>Figma</span>
                     </div>
-                    <button class="project-button">Case Study <img src="images/arrow.svg" alt="button-icon"></button>
+                    <a class="project-button" href="project-a.html">Case Study <img src="images/arrow.svg"
+                            alt="button-icon"></a>
                 </div>
 
                 <div class="project-card">
@@ -144,7 +148,8 @@
                         <span>Adobe CC</span>
                         <span>Figma</span>
                     </div>
-                    <button class="project-button">Case Study <img src="images/arrow.svg" alt="button-icon"></button>
+                    <a class="project-button" href="project-a.html">Case Study <img src="images/arrow.svg"
+                            alt="button-icon"></a>
                 </div>
 
                 <div class="project-card">
@@ -162,14 +167,15 @@
                         <span>Adobe CC</span>
                         <span>Figma</span>
                     </div>
-                    <button class="project-button">Case Study <img src="images/arrow.svg" alt="button-icon"></button>
+                    <a class="project-button" href="project-a.html">Case Study <img src="images/arrow.svg"
+                            alt="button-icon"></a>
                 </div>
 
             </div>
         </section>
-        <section>
+        <section class="explore" id="explore" data-section="explore">
             <h1>Explore</h1>
-            <div class="explore" id="explore">
+            <div class="explore-grid">
                 <div class="explore-item">
                     <div class="explore-preview">
                         <img src="images/aggierewards.png" alt="Design Previews">
@@ -183,7 +189,8 @@
                             <span>Adobe CC</span>
                             <span>Procreate</span>
                         </div>
-                        <button class="project-button">Explore<img src="images/arrow.svg" alt="button-icon"></button>
+                        <a class="project-button" href="project-a.html">Explore<img src="images/arrow.svg"
+                                alt="button-icon"></a>
                     </div>
                 </div>
 
@@ -200,7 +207,8 @@
                             <span>Adobe CC</span>
                             <span>Procreate</span>
                         </div>
-                        <button class="project-button">Explore<img src="images/arrow.svg" alt="button-icon"></button>
+                        <a class="project-button" href="project-a.html">Explore<img src="images/arrow.svg"
+                                alt="button-icon"></a>
                     </div>
                 </div>
                 <div class="explore-item">
@@ -216,13 +224,14 @@
                             <span>Adobe CC</span>
                             <span>Procreate</span>
                         </div>
-                        <button class="project-button">Explore<img src="images/arrow.svg" alt="button-icon"></button>
+                        <a class="project-button" href="project-a.html">Explore<img src="images/arrow.svg"
+                                alt="button-icon"></a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="about" id="about">
+        <section class="about" id="about" data-section="about">
             <h1>About Me</h1>
 
             <div class="about-info">
@@ -282,7 +291,6 @@
                         <span>UI/UX</span>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>

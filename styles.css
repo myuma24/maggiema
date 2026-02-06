@@ -19,7 +19,6 @@
     --tag-font: #000000;
 }
 
-
 body {
     font-family: "Nunito Sans", sans-serif;
     background-color: var(--bg-color);
@@ -42,6 +41,7 @@ body.dark-mode {
 
     --tag-background: #393e43;
     --tag-font: #FFFFFF;
+
 }
 
 body.dark-mode .nav-background {
@@ -53,6 +53,12 @@ body.dark-mode .nav-background {
 html {
     scroll-behavior: smooth;
 }
+
+section[id] {
+    scroll-margin-top: 70px;
+    /* adjust if needed */
+}
+
 
 h1 {
     font-weight: normal;
@@ -67,7 +73,6 @@ h2,
 h3 {
     color: var(--h-font-color);
     font-family: "Google Sans", sans-serif;
-    letter-spacing: -1px;
 }
 
 p {
@@ -76,15 +81,25 @@ p {
     color: var(--p-font-color);
 }
 
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+ul li {
+    line-height: 140%;
+    color: var(--p-font-color);
+}
+
 #theme-icon,
 #header-icon {
-    transition: opacity 0.3s ease-in-out;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
     display: inline-block;
     width: 25px;
     height: 25px;
     object-fit: contain;
 }
-
 
 /* Navbar */
 .nav-container {
@@ -213,6 +228,10 @@ p {
     padding: 20px;
 }
 
+.rundown {
+    margin: 50px 0 0 0;
+}
+
 .rundown p {
     margin: 0;
 }
@@ -223,6 +242,10 @@ p {
     border-radius: 999px;
     padding: 5px 10px 5px 10px;
     font-size: 16px;
+
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 #DNLink:hover {
@@ -345,13 +368,20 @@ p {
 .icon-blue img {
     width: 40px;
     height: 40px;
+    transform: scale(1);
+    transition: var(--transition-behavior-out);
+}
+
+.icon-blue img:hover {
+    transform: scale(1.1);
+    transition: var(--transition-behavior-in);
 }
 
 /* Work Grid */
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 20px;
 }
 
 .project-card {
@@ -430,6 +460,7 @@ p {
     display: flex;
     align-items: center;
     gap: 12px;
+    text-decoration: none;
 
     background: transparent;
     color: var(--p-font-color);
@@ -466,7 +497,12 @@ p {
 .explore {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+}
+
+.explore-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .explore h2 {
@@ -663,7 +699,7 @@ p {
 
 .cs-hero-frame {
     width: 100%;
-    aspect-ratio: 16 / 7;
+    aspect-ratio: 14 / 8;
     background: linear-gradient(135deg, #fce5d9 0%, #f28d6d 100%);
     border-radius: 40px;
     margin-bottom: 60px;
@@ -675,9 +711,9 @@ p {
 }
 
 .cs-hero-frame img {
-    width: 80%;
-    height: auto;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .cs-summary {
@@ -692,7 +728,7 @@ p {
     margin: 0;
 }
 
-.cs-col-sub{    
+.cs-col-sub {
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
     gap: 35px;
@@ -712,6 +748,27 @@ p {
     height: 100%;
 }
 
+.case-study-gif {
+  width: 33.333%;
+  min-width: 260px;
+  height: auto;
+  display: block;
+  margin: 24px auto;
+}
+
+
+.case-study-gif img {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 15px rgba(41, 38, 38, 0.176);
+}
+
+.cs-body {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
 .insight-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -720,8 +777,36 @@ p {
 
 .insight-items {
     background-color: var(--sub-bg-color);
-    padding: 20px;
+    padding: 30px;
+    margin: 0;
     box-shadow: 0 4px 15px rgba(41, 38, 38, 0.176);
+}
+
+.insight-items p {
+    margin: 0;
+}
+
+.final-images {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    align-items: start;
+    margin-top: 18px;
+    align-items: baseline;
+}
+
+.final-images img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--stroke-color);
+    box-shadow: 0 4px 15px rgba(41, 38, 38, 0.176);
+}
+
+@media (max-width: 1200px) {
+    .final-images {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 
@@ -774,4 +859,14 @@ p {
     .cs-title {
         font-size: 2.5rem;
     }
+
+    .insight-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .final-images {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
 }
