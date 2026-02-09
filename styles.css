@@ -55,10 +55,6 @@ html.dark-mode .nav-background {
         var(--glass-fill);
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 main.container {
     opacity: 1;
     transform: translateY(0);
