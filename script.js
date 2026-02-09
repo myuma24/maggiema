@@ -1,4 +1,9 @@
 (function () {
+  /* -----------------------------
+     CONSTANTS & DOM REFERENCES
+  ------------------------------ */
+  const THEME_KEY = "preferred-theme";
+
   const DigitalNest = document.getElementById("DNLink");
   const themeToggle = document.getElementById("theme-toggle");
   const themeIcon = document.getElementById("theme-icon");
@@ -6,9 +11,13 @@
 
   const navLinks = document.querySelectorAll(".nav-link");
   const sections = document.querySelectorAll("[data-section]");
+  const main = document.querySelector("main.container");
 
   let isScrolling = false;
 
+  /* -----------------------------
+     EXTERNAL LINK
+  ------------------------------ */
   if (DigitalNest) {
     DigitalNest.style.cursor = "pointer";
     DigitalNest.addEventListener("click", () => {
@@ -16,6 +25,78 @@
     });
   }
 
+  /* -----------------------------
+     THEME HANDLING
+  ------------------------------ */
+  function applyTheme(isDark, animate = false) {
+    document.documentElement.classList.toggle("dark-mode", isDark);
+    const newSrc = isDark ? "images/darkmode.svg" : "images/lightmode.svg";
+
+    [themeIcon, headIcon].forEach((icon) => {
+      if (!icon) return;
+
+      if (!animate) {
+        if (icon.tagName === "IMG") icon.src = newSrc;
+        else icon.textContent = isDark ? "🌙" : "☀️";
+        return;
+      }
+
+      icon.style.transform = "scale(0)";
+      icon.style.opacity = "0";
+
+      setTimeout(() => {
+        if (icon.tagName === "IMG") icon.src = newSrc;
+        else icon.textContent = isDark ? "🌙" : "☀️";
+
+        icon.style.opacity = "1";
+        icon.style.transform = "scale(1)";
+      }, 150);
+    });
+  }
+
+  // Restore saved theme
+  const savedTheme = localStorage.getItem(THEME_KEY);
+  if (savedTheme === "dark") {
+    applyTheme(true);
+  }
+
+  // Toggle theme
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const isDark = !document.documentElement.classList.contains("dark-mode");
+      applyTheme(isDark, true);
+      localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
+    });
+  }
+
+  /* -----------------------------
+     PAGE TRANSITIONS (MULTI-PAGE)
+  ------------------------------ */
+  document.querySelectorAll("a[href]").forEach((link) => {
+    const href = link.getAttribute("href");
+
+    if (
+      !href ||
+      href.startsWith("#") ||
+      href.startsWith("http") ||
+      href.startsWith("mailto:")
+    ) {
+      return;
+    }
+
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      main?.classList.add("page-exit");
+
+      setTimeout(() => {
+        window.location.href = href;
+      }, 400);
+    });
+  });
+
+  /* -----------------------------
+     NAV ACTIVE STATE
+  ------------------------------ */
   function setActive(hash) {
     navLinks.forEach((link) => {
       link.classList.toggle("active", link.getAttribute("href") === hash);
@@ -24,37 +105,18 @@
 
   function getNavOffset() {
     const nav = document.querySelector(".nav-container");
-    if (!nav) return 70;
-    return nav.getBoundingClientRect().bottom + 10;
+    return nav ? nav.getBoundingClientRect().bottom + 10 : 70;
   }
 
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-      const isDark = document.body.classList.contains("dark-mode");
-      const newSrc = isDark ? "images/darkmode.svg" : "images/lightmode.svg";
-
-      [themeIcon, headIcon].forEach((icon) => {
-        if (!icon) return;
-
-        icon.style.transform = "scale(0)";
-        icon.style.opacity = "0";
-
-        setTimeout(() => {
-          if (icon.tagName === "IMG") icon.src = newSrc;
-          else icon.textContent = isDark ? "🌙" : "☀️";
-
-          icon.style.opacity = "1";
-          icon.style.transform = "scale(1)";
-        }, 150);
-      });
-    });
-  }
-
-  const moveLayers = Array.from(document.querySelectorAll(".move")).map((el, index) => ({
-    el,
-    intensity: 20 - index * 3,
-  }));
+  /* -----------------------------
+     AVATAR PARALLAX
+  ------------------------------ */
+  const moveLayers = Array.from(document.querySelectorAll(".move")).map(
+    (el, index) => ({
+      el,
+      intensity: 20 - index * 3,
+    })
+  );
 
   if (moveLayers.length) {
     let px = 0.5;
@@ -81,45 +143,45 @@
     );
   }
 
+  /* -----------------------------
+     SCROLL-BASED NAV HIGHLIGHT
+  ------------------------------ */
   if (sections.length && navLinks.length) {
     let lastActive = null;
     let raf = null;
 
     function updateActiveSection() {
-    if (isScrolling) return;
+      if (isScrolling) return;
 
-    const anchorY = window.innerHeight * 0.45;
+      const anchorY = window.innerHeight * 0.45;
+      let inBand = null;
+      let best = null;
+      let bestDist = Infinity;
 
-    let inBand = null;
-    let best = null;
-    let bestDist = Infinity;
-
-    sections.forEach((el) => {
+      sections.forEach((el) => {
         const rect = el.getBoundingClientRect();
-
-        if (rect.bottom <= 0) return;
-        if (rect.top >= window.innerHeight) return;
+        if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
 
         if (rect.top <= anchorY && rect.bottom >= anchorY) {
-        inBand = el;
-        return;
+          inBand = el;
+          return;
         }
 
         const dist = Math.abs(rect.top - anchorY);
         if (dist < bestDist) {
-        bestDist = dist;
-        best = el;
+          bestDist = dist;
+          best = el;
         }
-    });
+      });
 
-    const chosen = inBand || best;
-    if (!chosen) return;
+      const chosen = inBand || best;
+      if (!chosen) return;
 
-    const id = chosen.dataset.section;
-    if (!id || id === lastActive) return;
+      const id = chosen.dataset.section;
+      if (!id || id === lastActive) return;
 
-    lastActive = id;
-    setActive(`#${id}`);
+      lastActive = id;
+      setActive(`#${id}`);
     }
 
     function requestUpdate() {
@@ -137,14 +199,13 @@
     requestUpdate();
   }
 
+  /* -----------------------------
+     NAV LINK SMOOTH SCROLL
+  ------------------------------ */
   ["wheel", "touchstart", "keydown"].forEach((evt) => {
-    window.addEventListener(
-      evt,
-      () => {
-        isScrolling = false;
-      },
-      { passive: true }
-    );
+    window.addEventListener(evt, () => {
+      isScrolling = false;
+    }, { passive: true });
   });
 
   navLinks.forEach((link) => {
@@ -154,7 +215,6 @@
 
       e.preventDefault();
       isScrolling = true;
-
       setActive(targetId);
 
       if (targetId === "#home") {
@@ -163,7 +223,10 @@
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
           const offset = getNavOffset();
-          const y = window.scrollY + targetElement.getBoundingClientRect().top - offset;
+          const y =
+            window.scrollY +
+            targetElement.getBoundingClientRect().top -
+            offset;
           window.scrollTo({ top: y, behavior: "smooth" });
         }
       }
@@ -172,5 +235,13 @@
         isScrolling = false;
       }, 900);
     });
+  });
+
+  /* -----------------------------
+     ENABLE TRANSITIONS AFTER LOAD
+  ------------------------------ */
+  requestAnimationFrame(() => {
+    document.documentElement.classList.add("theme-ready");
+    main?.classList.remove("page-exit");
   });
 })();
