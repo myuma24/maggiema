@@ -1,10 +1,21 @@
 (function () {
-    console.log('running js');
+    console.log("running js");
     const THEME_KEY = "preferred-theme";
     const app = document.getElementById("app");
     const TRANSITION_DURATION = 400;
 
     if (!app) return;
+
+    const BASE_PATH = (() => {
+        let p = location.pathname || "/";
+        if (!p.endsWith("/")) {
+            p = p.substring(0, p.lastIndexOf("/") + 1);
+        }
+        return p;
+    })();
+
+    const normalizePath = (p) => (p || "").replace(/^\//, "");
+    const toFetchUrl = (p) => BASE_PATH + normalizePath(p);
 
     let isScrolling = false;
 
@@ -22,7 +33,7 @@
 
     function applyTheme(isDark, animate = false) {
         document.documentElement.classList.toggle("dark-mode", isDark);
-        const newSrc = isDark ? "/images/darkmode.svg" : "/images/lightmode.svg";
+        const newSrc = toFetchUrl(isDark ? "images/darkmode.svg" : "images/lightmode.svg");
 
         [themeIcon, headIcon].forEach((icon) => {
             if (!icon) return;
@@ -63,8 +74,8 @@
     }
 
     function isHomePath(path) {
-        const base = (path || "").split("#")[0];
-        return base === "/pages/home.html" || base === "/index.html" || base === "/" || base === "";
+        const base = normalizePath((path || "").split("#")[0]);
+        return base === "pages/home.html" || base === "index.html" || base === "" || base === ".";
     }
 
     function clearAllActive() {
@@ -81,8 +92,8 @@
     function setPlayActive(isActive) {
         navLinksRef.forEach((l) => {
             const href = l.getAttribute("href") || "";
-            const base = href.split("#")[0];
-            const isPlayLink = l.dataset.route === "play" || base === "/pages/play.html";
+            const base = normalizePath(href.split("#")[0]);
+            const isPlayLink = l.dataset.route === "play" || base === "pages/play.html";
             if (isPlayLink) l.classList.toggle("active", isActive);
         });
     }
@@ -90,7 +101,7 @@
     function syncNavForPath(path) {
         clearAllActive();
 
-        if (path.split("#")[0] === "/pages/play.html") {
+        if (normalizePath(path.split("#")[0]) === "pages/play.html") {
             setPlayActive(true);
             return;
         }
@@ -106,7 +117,7 @@
 
         if (push) {
             const url = `#${hash}`;
-            history.pushState({ path: `/pages/home.html#${hash}` }, "", url);
+            history.pushState({ path: `pages/home.html#${hash}` }, "", url);
         }
 
         setActiveByHash(hash);
@@ -153,7 +164,7 @@
         sectionsRef = Array.from(document.querySelectorAll("[data-section]"));
         moveLayersRef = Array.from(document.querySelectorAll(".move")).map((el, index) => ({
             el,
-            intensity: 20 - index * 3
+            intensity: 20 - index * 3,
         }));
 
         lastActive = null;
@@ -202,21 +213,22 @@
     }
 
     function routeToUrlHash(path) {
-        const [cleanPath, hash] = (path || "").split("#");
+        const [rawClean, hash] = (path || "").split("#");
+        const cleanPath = normalizePath(rawClean);
 
-        if (cleanPath === "/pages/play.html") return "#play";
-        if (cleanPath.startsWith("/cases/")) return `#${cleanPath}`;
-        if (cleanPath === "/pages/home.html") return hash ? `#${hash}` : "#home";
+        if (cleanPath === "pages/play.html") return "#play";
+        if (cleanPath.startsWith("cases/")) return `#${cleanPath}`;
+        if (cleanPath === "pages/home.html") return hash ? `#${hash}` : "#home";
 
         return "#home";
     }
 
     function urlHashToRoute(hashStr) {
         const h = (hashStr || "").replace(/^#/, "");
-        if (!h) return "/pages/home.html#home";
-        if (h === "play") return "/pages/play.html";
-        if (h.startsWith("/cases/")) return h;
-        return `/pages/home.html#${h}`;
+        if (!h) return "pages/home.html#home";
+        if (h === "play") return "pages/play.html";
+        if (h.startsWith("cases/")) return h;
+        return `pages/home.html#${h}`;
     }
 
     function currentRoutePath() {
@@ -224,7 +236,8 @@
     }
 
     async function navigateTo(path, addToHistory = true, isInitial = false) {
-        const [cleanPath, hash] = (path || "").split("#");
+        const [rawClean, hash] = (path || "").split("#");
+        const cleanPath = normalizePath(rawClean);
 
         if (!isInitial) {
             app.classList.add("page-exit");
@@ -232,7 +245,7 @@
         }
 
         try {
-            const res = await fetch(cleanPath);
+            const res = await fetch(toFetchUrl(cleanPath));
             if (!res.ok) throw new Error("404");
             const html = await res.text();
 
@@ -246,7 +259,7 @@
                 history.pushState({ path: fullPath }, "", routeToUrlHash(fullPath));
             }
 
-            if (cleanPath === "/pages/home.html") {
+            if (cleanPath === "pages/home.html") {
                 if (hash) {
                     window.scrollTo(0, 0);
                     requestAnimationFrame(() => scrollToHash(hash, false));
@@ -273,16 +286,18 @@
         const link = e.target.closest("a");
         if (!link) return;
 
-        const href = link.getAttribute("href");
-        if (!href || href === "#") return;
-        if (href.startsWith("http") || href.startsWith("mailto:")) return;
+        const hrefRaw = link.getAttribute("href");
+        if (!hrefRaw || hrefRaw === "#") return;
+        if (hrefRaw.startsWith("http") || hrefRaw.startsWith("mailto:")) return;
+
+        const href = normalizePath(hrefRaw);
 
         if (href.includes("#")) {
-            const [base, hash] = href.split("#");
+            const [, hash] = href.split("#");
             e.preventDefault();
 
-            const targetRoute = `/pages/home.html#${hash}`;
-            const onHome = currentRoutePath().split("#")[0] === "/pages/home.html";
+            const targetRoute = `pages/home.html#${hash}`;
+            const onHome = normalizePath(currentRoutePath().split("#")[0]) === "pages/home.html";
 
             if (!onHome) {
                 navigateTo(targetRoute);
@@ -299,7 +314,7 @@
 
     window.addEventListener("popstate", (e) => {
         const statePath = e.state?.path;
-        const path = statePath || currentRoutePath() || "/pages/home.html#home";
+        const path = statePath || currentRoutePath() || "pages/home.html#home";
         navigateTo(path, false);
     });
 
