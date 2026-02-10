@@ -449,7 +449,6 @@ ul li {
 }
 
 .tags {
-    width: 250px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -803,6 +802,7 @@ ul li {
     gap: 40px;
     padding: 30px;
     box-shadow: 0 4px 15px rgba(41, 38, 38, 0.176);
+    background-color: var(--sub-bg-color);
 
 }
 
