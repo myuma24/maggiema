@@ -4,6 +4,9 @@
     const app = document.getElementById("app");
     const TRANSITION_DURATION = 400;
 
+    const ABOUT_FILE = "pages/about.html";
+
+
     if (!app) return;
 
     const BASE_PATH = (() => {
@@ -231,9 +234,17 @@
         return `pages/home.html#${h}`;
     }
 
-    function currentRoutePath() {
-        return urlHashToRoute(location.hash);
+    function currentRoute() {
+        const h = (location.hash || "").replace(/^#/, "");
+
+        if (!h || h === "home") return { key: "home", file: HOME_FILE, anchor: "home" };
+        if (h === "play") return { key: "play", file: PLAY_FILE, anchor: null };
+        if (h === "about") return { key: "about", file: ABOUT_FILE, anchor: null };
+        if (h.startsWith("cases/")) return { key: "case", file: h, anchor: null };
+
+        return { key: "home", file: HOME_FILE, anchor: h };
     }
+
 
     async function navigateTo(path, addToHistory = true, isInitial = false) {
         const [rawClean, hash] = (path || "").split("#");
