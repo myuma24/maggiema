@@ -4,10 +4,11 @@
     const app = document.getElementById("app");
     const TRANSITION_DURATION = 400;
 
-    const ABOUT_FILE = "pages/about.html";
-
-
     if (!app) return;
+
+    const HOME_FILE = "pages/home.html";
+    const PLAY_FILE = "pages/play.html";
+    const ABOUT_FILE = "pages/about.html";
 
     const BASE_PATH = (() => {
         let p = location.pathname || "/";
@@ -61,7 +62,7 @@
     }
 
     const savedTheme = localStorage.getItem(THEME_KEY);
-    if (savedTheme === "dark") applyTheme(true);
+    applyTheme(savedTheme === "dark");
 
     if (themeToggle) {
         themeToggle.addEventListener("click", () => {
@@ -78,7 +79,7 @@
 
     function isHomePath(path) {
         const base = normalizePath((path || "").split("#")[0]);
-        return base === "pages/home.html" || base === "index.html" || base === "" || base === ".";
+        return base === HOME_FILE || base === "index.html" || base === "" || base === ".";
     }
 
     function clearAllActive() {
@@ -94,18 +95,33 @@
 
     function setPlayActive(isActive) {
         navLinksRef.forEach((l) => {
-            const href = l.getAttribute("href") || "";
-            const base = normalizePath(href.split("#")[0]);
-            const isPlayLink = l.dataset.route === "play" || base === "pages/play.html";
+            const href = normalizePath(l.getAttribute("href") || "");
+            const base = href.split("#")[0];
+            const isPlayLink = l.dataset.route === "play" || base === PLAY_FILE;
             if (isPlayLink) l.classList.toggle("active", isActive);
+        });
+    }
+
+    function setAboutActive(isActive) {
+        navLinksRef.forEach((l) => {
+            const href = normalizePath(l.getAttribute("href") || "");
+            const base = href.split("#")[0];
+            const isAboutLink = l.dataset.route === "about" || base === ABOUT_FILE;
+            if (isAboutLink) l.classList.toggle("active", isActive);
         });
     }
 
     function syncNavForPath(path) {
         clearAllActive();
+        const base = normalizePath(path.split("#")[0]);
 
-        if (normalizePath(path.split("#")[0]) === "pages/play.html") {
+        if (base === PLAY_FILE) {
             setPlayActive(true);
+            return;
+        }
+
+        if (base === ABOUT_FILE) {
+            setAboutActive(true);
             return;
         }
 
@@ -120,7 +136,7 @@
 
         if (push) {
             const url = `#${hash}`;
-            history.pushState({ path: `pages/home.html#${hash}` }, "", url);
+            history.pushState({ path: `${HOME_FILE}#${hash}` }, "", url);
         }
 
         setActiveByHash(hash);
@@ -167,7 +183,7 @@
         sectionsRef = Array.from(document.querySelectorAll("[data-section]"));
         moveLayersRef = Array.from(document.querySelectorAll(".move")).map((el, index) => ({
             el,
-            intensity: 20 - index * 3,
+            intensity: 20 - index * 3
         }));
 
         lastActive = null;
@@ -219,32 +235,26 @@
         const [rawClean, hash] = (path || "").split("#");
         const cleanPath = normalizePath(rawClean);
 
-        if (cleanPath === "pages/play.html") return "#play";
+        if (cleanPath === PLAY_FILE) return "#play";
+        if (cleanPath === ABOUT_FILE) return "#about";
         if (cleanPath.startsWith("cases/")) return `#${cleanPath}`;
-        if (cleanPath === "pages/home.html") return hash ? `#${hash}` : "#home";
+        if (cleanPath === HOME_FILE) return hash ? `#${hash}` : "#home";
 
         return "#home";
     }
 
     function urlHashToRoute(hashStr) {
         const h = (hashStr || "").replace(/^#/, "");
-        if (!h) return "pages/home.html#home";
-        if (h === "play") return "pages/play.html";
+        if (!h) return `${HOME_FILE}#home`;
+        if (h === "play") return PLAY_FILE;
+        if (h === "about") return ABOUT_FILE;
         if (h.startsWith("cases/")) return h;
-        return `pages/home.html#${h}`;
+        return `${HOME_FILE}#${h}`;
     }
 
-    function currentRoute() {
-        const h = (location.hash || "").replace(/^#/, "");
-
-        if (!h || h === "home") return { key: "home", file: HOME_FILE, anchor: "home" };
-        if (h === "play") return { key: "play", file: PLAY_FILE, anchor: null };
-        if (h === "about") return { key: "about", file: ABOUT_FILE, anchor: null };
-        if (h.startsWith("cases/")) return { key: "case", file: h, anchor: null };
-
-        return { key: "home", file: HOME_FILE, anchor: h };
+    function currentRoutePath() {
+        return urlHashToRoute(location.hash);
     }
-
 
     async function navigateTo(path, addToHistory = true, isInitial = false) {
         const [rawClean, hash] = (path || "").split("#");
@@ -270,7 +280,7 @@
                 history.pushState({ path: fullPath }, "", routeToUrlHash(fullPath));
             }
 
-            if (cleanPath === "pages/home.html") {
+            if (cleanPath === HOME_FILE) {
                 if (hash) {
                     window.scrollTo(0, 0);
                     requestAnimationFrame(() => scrollToHash(hash, false));
@@ -307,8 +317,8 @@
             const [, hash] = href.split("#");
             e.preventDefault();
 
-            const targetRoute = `pages/home.html#${hash}`;
-            const onHome = normalizePath(currentRoutePath().split("#")[0]) === "pages/home.html";
+            const targetRoute = `${HOME_FILE}#${hash}`;
+            const onHome = normalizePath(currentRoutePath().split("#")[0]) === HOME_FILE;
 
             if (!onHome) {
                 navigateTo(targetRoute);
@@ -325,7 +335,7 @@
 
     window.addEventListener("popstate", (e) => {
         const statePath = e.state?.path;
-        const path = statePath || currentRoutePath() || "pages/home.html#home";
+        const path = statePath || currentRoutePath() || `${HOME_FILE}#home`;
         navigateTo(path, false);
     });
 
