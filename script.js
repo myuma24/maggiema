@@ -345,4 +345,5 @@
     requestAnimationFrame(() => {
         document.documentElement.classList.add("theme-ready");
     });
+
 })();
