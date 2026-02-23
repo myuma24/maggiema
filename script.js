@@ -235,20 +235,24 @@
         const [rawClean, hash] = (path || "").split("#");
         const cleanPath = normalizePath(rawClean);
 
+        if (cleanPath === HOME_FILE) return hash ? `#${hash}` : "#home";
         if (cleanPath === PLAY_FILE) return "#play";
         if (cleanPath === ABOUT_FILE) return "#about";
+        if (cleanPath.startsWith("pages/")) return `#${cleanPath}`;
         if (cleanPath.startsWith("cases/")) return `#${cleanPath}`;
-        if (cleanPath === HOME_FILE) return hash ? `#${hash}` : "#home";
 
         return "#home";
     }
 
     function urlHashToRoute(hashStr) {
         const h = (hashStr || "").replace(/^#/, "");
+
         if (!h) return `${HOME_FILE}#home`;
         if (h === "play") return PLAY_FILE;
         if (h === "about") return ABOUT_FILE;
+        if (h.startsWith("pages/")) return h;
         if (h.startsWith("cases/")) return h;
+
         return `${HOME_FILE}#${h}`;
     }
 
@@ -314,18 +318,23 @@
         const href = normalizePath(hrefRaw);
 
         if (href.includes("#")) {
-            const [, hash] = href.split("#");
+            const [baseRaw, hash] = href.split("#");
             e.preventDefault();
 
-            const targetRoute = `${HOME_FILE}#${hash}`;
+            const base = normalizePath(baseRaw);
             const onHome = normalizePath(currentRoutePath().split("#")[0]) === HOME_FILE;
 
-            if (!onHome) {
-                navigateTo(targetRoute);
+            if (!base || base === HOME_FILE) {
+                const targetRoute = `${HOME_FILE}#${hash}`;
+                if (!onHome) {
+                    navigateTo(targetRoute);
+                    return;
+                }
+                scrollToHash(hash, false);
                 return;
             }
 
-            scrollToHash(hash, false);
+            navigateTo(`${base}#${hash}`);
             return;
         }
 
@@ -346,4 +355,63 @@
         document.documentElement.classList.add("theme-ready");
     });
 
+    (function initLightbox() {
+        let box = document.getElementById("lightbox");
+
+        function ensureLightbox() {
+            if (box) return box;
+            box = document.createElement("div");
+            box.id = "lightbox";
+            box.className = "lightbox";
+            box.innerHTML = `
+      <div class="lightbox-inner">
+        <button class="lightbox-close" type="button" aria-label="Close">✕</button>
+        <img class="lightbox-img" alt="">
+      </div>
+    `;
+            document.body.appendChild(box);
+            return box;
+        }
+
+        function openLightbox(src, alt) {
+            const el = ensureLightbox();
+            const img = el.querySelector(".lightbox-img");
+            img.src = src;
+            img.alt = alt || "";
+            el.classList.add("is-open");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeLightbox() {
+            if (!box) return;
+            const img = box.querySelector(".lightbox-img");
+            box.classList.remove("is-open");
+            img.src = "";
+            img.alt = "";
+            document.body.style.overflow = "";
+        }
+
+        document.addEventListener("click", (e) => {
+            const tile = e.target.closest(".bento-tile");
+            if (tile) {
+                e.preventDefault();
+                const full = tile.getAttribute("data-full");
+                const img = tile.querySelector("img");
+                if (full) openLightbox(full, img ? img.alt : "");
+                return;
+            }
+
+            if (e.target.closest(".lightbox-close")) {
+                e.preventDefault();
+                closeLightbox();
+                return;
+            }
+
+            if (e.target.id === "lightbox") closeLightbox();
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeLightbox();
+        });
+    })();
 })();
