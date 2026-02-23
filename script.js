@@ -1,5 +1,6 @@
 (function () {
     console.log("running js");
+
     const THEME_KEY = "preferred-theme";
     const app = document.getElementById("app");
     const TRANSITION_DURATION = 400;
@@ -32,19 +33,25 @@
     let pointerListenerAttached = false;
 
     const themeToggle = document.getElementById("theme-toggle");
-    const themeIcon = document.getElementById("theme-icon");
-    const headIcon = document.getElementById("header-icon");
 
     function applyTheme(isDark, animate = false) {
         document.documentElement.classList.toggle("dark-mode", isDark);
+
         const newSrc = toFetchUrl(isDark ? "images/darkmode.svg" : "images/lightmode.svg");
+
+        // Re-select every time because #header-icon may be injected later via navigateTo()
+        const themeIcon = document.getElementById("theme-icon");
+        const headIcon = document.getElementById("header-icon");
 
         [themeIcon, headIcon].forEach((icon) => {
             if (!icon) return;
 
             if (!animate) {
-                if (icon.tagName === "IMG") icon.src = newSrc;
-                else icon.textContent = isDark ? "🌙" : "☀️";
+                if (icon.tagName === "IMG") {
+                    icon.src = newSrc;
+                } else {
+                    icon.textContent = isDark ? "🌙" : "☀️";
+                }
                 return;
             }
 
@@ -52,8 +59,11 @@
             icon.style.transform = "scale(0)";
 
             setTimeout(() => {
-                if (icon.tagName === "IMG") icon.src = newSrc;
-                else icon.textContent = isDark ? "🌙" : "☀️";
+                if (icon.tagName === "IMG") {
+                    icon.src = newSrc;
+                } else {
+                    icon.textContent = isDark ? "🌙" : "☀️";
+                }
 
                 icon.style.opacity = "1";
                 icon.style.transform = "scale(1)";
@@ -208,6 +218,7 @@
                     py = e.clientY / window.innerHeight;
 
                     if (raf) return;
+
                     raf = requestAnimationFrame(() => {
                         if (moveLayersRef.length) {
                             moveLayersRef.forEach(({ el, intensity }) => {
@@ -238,6 +249,7 @@
         if (cleanPath === HOME_FILE) return hash ? `#${hash}` : "#home";
         if (cleanPath === PLAY_FILE) return "#play";
         if (cleanPath === ABOUT_FILE) return "#about";
+
         if (cleanPath.startsWith("pages/")) return `#${cleanPath}`;
         if (cleanPath.startsWith("cases/")) return `#${cleanPath}`;
 
@@ -275,6 +287,10 @@
             const html = await res.text();
 
             app.innerHTML = html;
+
+            // Re-apply current theme so icons injected by new page get synced immediately
+            applyTheme(document.documentElement.classList.contains("dark-mode"), false);
+
             initPageScripts();
 
             const fullPath = hash ? `${cleanPath}#${hash}` : cleanPath;
@@ -326,10 +342,12 @@
 
             if (!base || base === HOME_FILE) {
                 const targetRoute = `${HOME_FILE}#${hash}`;
+
                 if (!onHome) {
                     navigateTo(targetRoute);
                     return;
                 }
+
                 scrollToHash(hash, false);
                 return;
             }
@@ -360,6 +378,7 @@
 
         function ensureLightbox() {
             if (box) return box;
+
             box = document.createElement("div");
             box.id = "lightbox";
             box.className = "lightbox";
@@ -384,6 +403,7 @@
 
         function closeLightbox() {
             if (!box) return;
+
             const img = box.querySelector(".lightbox-img");
             box.classList.remove("is-open");
             img.src = "";
