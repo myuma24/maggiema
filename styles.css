@@ -766,9 +766,20 @@ ul li {
     letter-spacing: 1px;
 }
 
+
 .case-study-images img {
     width: 100%;
     height: 100%;
+}
+
+.case-study-images2 {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 100%;
+}
+
+.case-study-images2 img {
+    width: 100%;
 }
 
 .case-study-gif {
@@ -798,6 +809,12 @@ ul li {
     gap: 50px;
 }
 
+.aggie-insight-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
 .insight-items {
     background-color: var(--sub-bg-color);
     padding: 30px;
@@ -812,7 +829,6 @@ ul li {
     padding: 30px;
     box-shadow: 0 4px 15px rgba(41, 38, 38, 0.176);
     background-color: var(--sub-bg-color);
-
 }
 
 .design-system h4 {
@@ -835,6 +851,23 @@ ul li {
     margin: 0;
 }
 
+.iterated-color {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.case-study-demo {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.case-study-demo img {
+    width: calc(33.33% - 10px);
+}
+
 .final-images {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -850,6 +883,17 @@ ul li {
     display: block;
     border: 1px solid var(--darker-stroke-color);
     box-shadow: 0 4px 15px rgba(41, 38, 38, 0.176);
+}
+
+.final_last {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 12px;
+    justify-content: baseline;
+    width: 100%;
+    max-width: 100%;
 }
 
 .case-study-navigation {
@@ -877,6 +921,20 @@ ul li {
 .next-case-btn:active {
     transform: translateY(0);
     box-shadow: none;
+}
+
+.inactive-btn {
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: var(--darker-stroke-color);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+
+    pointer-events: none;
+    cursor: not-allowed;
 }
 
 .play-container {
@@ -972,6 +1030,12 @@ ul li {
     .bento-span-3 {
         grid-column: span 1;
     }
+
+    .iterated-color {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+    }
 }
 
 .lightbox {
@@ -1035,12 +1099,6 @@ ul li {
 
 
 
-@media (max-width: 1200px) {
-    .final-images {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
 @media (min-width: 900px) {
     .gameCard {
         grid-template-columns: 1fr 1.2fr;
@@ -1066,6 +1124,7 @@ ul li {
         width: 100%;
         height: 100%;
     }
+
 }
 
 
@@ -1121,13 +1180,15 @@ ul li {
         grid-template-columns: 1fr;
     }
 
-
-    .final-images {
-        grid-template-columns: repeat(2, 1fr);
+    .aggie-insight-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
     }
 
     .design-system {
         flex-direction: column;
     }
+
 
 }
