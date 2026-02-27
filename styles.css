@@ -753,9 +753,17 @@ ul li {
 
 .cs-col-sub {
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-columns: 3fr 2fr;
     gap: 35px;
 }
+
+.cs-col-subgroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 35px;
+}
+
 
 .cs-label {
     display: block;
@@ -1123,6 +1131,12 @@ ul li {
     .profile-image {
         width: 100%;
         height: 100%;
+    }
+
+    .cs-col-sub {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 35px;
     }
 
 }
