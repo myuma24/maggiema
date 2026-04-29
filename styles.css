@@ -20,7 +20,7 @@
     --tag-font: #000000;
 
 
-    --fark-blue: #5459E9;
+    --fark-blue: #0D4CD3;
 }
 
 html:not(.theme-ready) * {
@@ -51,6 +51,8 @@ html.dark-mode body {
 
     --tag-background: #393e43;
     --tag-font: #FFFFFF;
+
+    --fark-blue: #a1a4f9;
 
 }
 
@@ -96,7 +98,7 @@ h4 {
 
 h6 {
     font-family: "Inter", sans-serif;
-    color: var(--primary-color);
+    color: var(--h-font-color);
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -529,6 +531,12 @@ ul li {
 }
 
 /* FARK STYLES */
+
+.fark-theme .cs-eyebrow,
+.fark-theme .cs-label{
+    color: var(--fark-blue);
+}
+
 #fark-rebrand {
     display: flex;
     flex-direction: column;
