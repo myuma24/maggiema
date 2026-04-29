@@ -1,10 +1,11 @@
 :root {
     --bg-color: #ffffff;
     --sub-bg-color: #ffffff;
+    --off-whitebg: #f7f7f7;
     --darker-stroke-color: #dadada;
     --avatar-background-color: #FCE5D9;
     --h-font-color: #202020;
-    --p-font-color: #474747;
+    --p-font-color: #2e2e2e;
     --secondary-font: #FB5081;
 
     --primary-color: #FB5081;
@@ -17,6 +18,9 @@
     --transform-behavior: scale(1.02);
     --tag-background: #eceef1;
     --tag-font: #000000;
+
+
+    --fark-blue: #5459E9;
 }
 
 html:not(.theme-ready) * {
@@ -40,6 +44,7 @@ html.dark-mode body {
     --glass-fill: #3e444d5c;
     --stroke-color: #3E444D;
     --darker-stroke-color: #3E444D;
+    --off-whitebg: #22282F;
 
     --h-font-color: #ffffff;
     --p-font-color: #e0e0e0;
@@ -89,11 +94,27 @@ h4 {
     font-family: "Google Sans", sans-serif;
 }
 
-p {
-    line-height: 180%;
-    font-size: 16px;
-    color: var(--p-font-color);
+h6 {
+    font-family: "Inter", sans-serif;
+    color: var(--primary-color);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0;
+
 }
+
+p {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 350;
+    font-size: 16px;
+    line-height: 1.3em;
+    text-align: start;
+    color: var(--p-font-color);
+
+}
+
 
 ul {
     display: flex;
@@ -237,10 +258,10 @@ ul li {
 .container {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 32px;
     max-width: 800px;
     margin: 75px auto;
-    padding: 20px;
+    padding: 0px;
 }
 
 .rundown h1 {
@@ -249,9 +270,10 @@ ul li {
 
 .rundown p {
     margin: 0;
+    line-height: 1.7em;
 }
 
-#DNLink {
+.meta-link {
     color: var(--primary-color);
     background-color: var(--accent-color);
     border-radius: 999px;
@@ -263,7 +285,7 @@ ul li {
     cursor: pointer;
 }
 
-#DNLink:hover {
+.meta-link:hover {
     cursor: pointer;
 }
 
@@ -506,6 +528,37 @@ ul li {
 
 }
 
+/* FARK STYLES */
+#fark-rebrand {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.fark-initial-research {
+    /* 1. The Breakout Logic */
+    width: 1200px;
+    max-width: 100vw;
+    /* Keeps it responsive on mobile */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* 2. Layout & Centering */
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+    margin-bottom: 24px;
+    flex-direction: column;
+}
+
+.fark-initial-research img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Explore Section Styles */
 
 .explore {
@@ -644,58 +697,10 @@ ul li {
     gap: 20px;
 }
 
-.experience-item {
-    border-bottom: 1px solid var(--darker-stroke-color);
-    padding-bottom: 25px;
-    margin-bottom: 20px;
-    transition: var(--transition-behavior-out);
-}
-
-.exp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.exp-brand {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.exp-logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    background: var(--avatar-background-color);
-    object-fit: cover;
-}
-
-.exp-title {
-    display: block;
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: var(--h-font-color);
-}
-
-.exp-company {
-    color: var(--p-font-color);
-    font-size: 0.9rem;
-}
-
-.exp-date {
-    font-size: 0.85rem;
-    color: var(--p-font-color);
-}
-
-.exp-description {
-    font-size: 0.95rem;
-    margin-bottom: 15px;
-    color: var(--p-font-color);
-}
-
 /* CASE STUDY CSS */
+.cs-container {
+    padding-top: 32px;
+}
 
 .cs-header-light {
     background-color: #ffffff;
@@ -742,18 +747,23 @@ ul li {
 .cs-summary {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 16px;
 }
 
 .cs-summary p {
     font-size: 16px;
-    line-height: 1.6;
-    margin: 0;
+    line-height: 1.5em;
 }
 
 .cs-col-sub {
     display: grid;
     grid-template-columns: 3fr 2fr;
+    gap: 35px;
+}
+
+.fark-cs-col-sub {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
     gap: 35px;
 }
 
@@ -764,6 +774,12 @@ ul li {
     gap: 35px;
 }
 
+.fark-cs-col-subgroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
 
 .cs-label {
     display: block;
@@ -773,7 +789,6 @@ ul li {
     margin-bottom: 15px;
     letter-spacing: 1px;
 }
-
 
 .case-study-images img {
     width: 100%;
@@ -798,7 +813,6 @@ ul li {
     margin: 24px auto;
 }
 
-
 .case-study-gif img {
     width: 100%;
     height: 100%;
@@ -808,7 +822,7 @@ ul li {
 .cs-body {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 32px;
 }
 
 .insight-grid {
@@ -818,9 +832,9 @@ ul li {
 }
 
 .aggie-insight-grid {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
 }
 
 .insight-items {
@@ -830,12 +844,59 @@ ul li {
     box-shadow: 0 4px 15px rgba(41, 38, 38, 0.176);
 }
 
+/* Fark CSS*/
+
+.cs-comparison-header {
+    margin-bottom: 40px;
+}
+
+.cs-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1000px;
+}
+
+.cs-comparison-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: var(--off-whitebg);
+    border: 1px solid var(--darker-stroke-color);
+
+}
+
+.cs-comparison-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cs-comparison-text p {
+    margin: 0;
+}
+
+.cs-comparison-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    background-color: #dadada;
+}
+
+
+/* Design System Section */
+
 .design-system {
     display: flex;
     flex-direction: row;
     gap: 40px;
     padding: 30px;
-    box-shadow: 0 4px 15px rgba(41, 38, 38, 0.176);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.176);
     background-color: var(--sub-bg-color);
 }
 
@@ -1115,6 +1176,36 @@ ul li {
 }
 
 @media (max-width: 600px) {
+    h1 {
+        font-weight: normal;
+        font-size: 24px;
+        color: var(--h-font-color);
+        font-family: "Google Sans", sans-serif;
+        letter-spacing: -1px;
+
+    }
+
+    h2 {
+        font-weight: 500;
+        font-size: 20px;
+        color: var(--h-font-color);
+        font-family: "Google Sans", sans-serif;
+    }
+
+    h3 {
+        font-weight: 500;
+        font-size: 18px;
+        color: var(--h-font-color);
+        font-family: "Google Sans", sans-serif;
+    }
+
+    h4 {
+        font-weight: 500;
+        font-size: 16px;
+        color: var(--h-font-color);
+        font-family: "Google Sans", sans-serif;
+    }
+
     .explore-item {
         grid-template-columns: 1fr;
     }
@@ -1139,10 +1230,37 @@ ul li {
         gap: 35px;
     }
 
+    .fark-cs-col-sub {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .fark-cs-col-subgroup {
+        flex-direction: row;
+    }
+
+    .final-images {
+        gap: 8px;
+    }
 }
 
 
 @media (max-width: 768px) {
+
+    main.container {
+        padding: 0px 18px;
+    }
+
+    .avatar-container {
+        width: 100%;
+
+    }
+
+    .avatar {
+        width: 100%;
+        height: 300px;
+    }
 
     .grid {
         grid-template-columns: 1fr;
@@ -1153,6 +1271,8 @@ ul li {
         justify-content: center;
         padding: 5%;
         gap: 15px;
+        min-width: 400px;
+        margin: auto;
     }
 
     .top-decoration {
@@ -1194,15 +1314,25 @@ ul li {
         grid-template-columns: 1fr;
     }
 
-    .aggie-insight-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-    }
 
     .design-system {
         flex-direction: column;
     }
 
+    .cs-comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
 
+}
+
+@media (max-width: 400px) {
+    .profile-card {
+        flex-direction: column;
+        justify-content: center;
+        padding: 5%;
+        gap: 15px;
+        min-width: 250px;
+        margin: auto;
+    }
 }
