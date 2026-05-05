@@ -1,36 +1,48 @@
 <section class="about" id="about" data-section="about">
     <h1>About Me</h1>
-
-    <div class="about-info">
-        <div class="profile-image">
-            <img src="images/profile_img.jpg" alt="profile-image">
+    
+    <div class="about-interactive-container">
+        <div class="card-stack" id="cardStack">
+            <div class="stack-card" style="--index: 0;"><img src="images/profile_img.jpg" alt="Profile"></div>
+            <div class="stack-card" style="--index: 1;"><img src="images/profile_img.jpg" alt="Education"></div>
+            <div class="stack-card" style="--index: 2;"><img src="images/profile_img.jpg" alt="Experience"></div>
+            <div class="stack-card" style="--index: 3;"><img src="images/profile_img.jpg" alt="Hobbies"></div>
+            <div class="stack-card" style="--index: 4;"><img src="images/profile_img.jpg" alt="Philosophy"></div>
         </div>
-        <div class="about-text">
-            <span class="cs-eyebrow">Hello again!</span>
-            <h1>I'm Maggie</h1>
-            <p>A UI/UX designer and artist at heart. In my work, I strive to empathize first, push the boundaries of
-                design, and create journeys not just about the destination, but also the conversations made along the
-                way.</p>
-        </div>
-    </div>
 
-    <div class="skills">
-        <p><strong>Education:</strong> Earned my <strong>Bachelor of Arts in Design</strong> and
-            <strong>Bachelor of Arts in Digital Media</strong> from UC Davis.
-        </p>
-        <p><strong>Hobbies:</strong> Crocheting, Knitting, Beading, Cooking, Reading, Gaming, Drawing, 3D
-            Modeling</p>
-        <div class="skills-container">
-            <p><strong>Skills:</strong></p>
-            <div class="explore-tags">
-                <span>Adobe CC</span>
-                <span>Procreate</span>
-                <span>Figma</span>
-                <span>WordPress</span>
-                <span>JavaScript</span>
-                <span>HTML/CSS</span>
+        <div class="about-text-box" id="aboutTextBox">
+            <div class="text-content active" data-card="0">
+                <span class="cs-eyebrow">Hello again!</span>
+                <h2>I'm Maggie</h2>
+                <p>A UI/UX designer and artist at heart. In my work, I strive to empathize first and create journeys not just about the destination, but the conversations made along the way.</p>
+            </div>
+            <div class="text-content" data-card="1">
+                <span class="cs-eyebrow">My Education</span>
+                <h2>B.A. in Design</h2>
+                <p>Graduated from UC Davis. I spend my time bridging the gap between interaction design and digital media—always led by UX and fueled by design thinking.</p>
+            </div>
+            <div class="text-content" data-card="2">
+                <span class="cs-eyebrow">My Experience</span>
+                <h2>UI/UX Designer</h2>
+                <p>I create user-centered designs prioritizing usability and accessibility through research, wireframing, and constant iteration based on feedback.</p>
+            </div>
+            <div class="text-content" data-card="3">
+                <span class="cs-eyebrow">My Hobbies</span>
+                <h2>Outside of Design</h2>
+                <p>Whether it’s crocheting, beading, or building miniature models, I love exploring different mediums and finding new ways to stay creative.
+                </p>
+                <p>Recently I've been really into collecting pokemon, getting familiar will Gel-X, and building Rolife!</p>
+            </div>
+            <div class="text-content" data-card="4">
+                <span class="cs-eyebrow">My Philosophy</span>
+                <h2>Design with Purpose</h2>
+                <p>I believe great design is invisible. Every pixel should serve a purpose, and every solution should be rooted in empathy.</p>
+            </div>
+            
+            <div class="stack-controls">
+                <span id="cardCounter">1 / 5</span>
+                <button id="stackNextBtn">My Education</button>
             </div>
         </div>
     </div>
-
 </section>
