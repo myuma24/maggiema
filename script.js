@@ -507,7 +507,10 @@
         const statuses = [
             "obsessing over every pixel",
             "searching for the perfect UI animation",
-            "re-organizing my pokemon cards"
+            "re-organizing my pokemon cards",
+            "debating if I should learn React",
+            "hunting for a missing curly bracket",
+            "missing the davis arboretum"
         ];
 
         // Pick a random status from the array
