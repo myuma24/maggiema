@@ -44,7 +44,7 @@ html.dark-mode body {
     --glass-fill: #3e444d5c;
     --stroke-color: #3E444D;
     --darker-stroke-color: #3E444D;
-    --off-whitebg: #22282F;
+    --off-whitebg: #30363d;
 
     --h-font-color: #ffffff;
     --p-font-color: #e0e0e0;
@@ -73,10 +73,44 @@ main.container.page-exit {
     transform: translateY(12px);
 }
 
+#status-text {
+    display: inline-block;
+    animation: popIn 0.4s ease-out forwards;
+    color: var(--secondary-font);
+    /* Optional: make the status a highlight color */
+}
+
+.site-footer {
+    width: 100%;
+    max-width: 800px;
+    margin: 0px auto 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--darker-stroke-color);
+    text-align: center;
+}
+
+.site-footer p {
+    font-family: "Google Sans", sans-serif;
+    font-size: 15px;
+    color: var(--h-font-color);
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+.site-footer .last-updated {
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    color: var(--p-font-color);
+    opacity: 0.5;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
 
 section[id] {
     scroll-margin-top: 70px;
-    /* adjust if needed */
 }
 
 

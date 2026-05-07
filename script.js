@@ -187,7 +187,7 @@
             setActiveByHash(id);
         }
     }
-    
+
     function initPageScripts() {
         navLinksRef = Array.from(document.querySelectorAll(".nav-link"));
         sectionsRef = Array.from(document.querySelectorAll("[data-section]"));
@@ -303,7 +303,7 @@
             scrollListenerAttached = true;
             window.addEventListener("scroll", updateActiveSection, { passive: true });
         }
-
+        updateCurrentStatus();
         updateActiveSection();
     }
 
@@ -499,4 +499,19 @@
             if (e.key === "Escape") closeLightbox();
         });
     })();
+
+    function updateCurrentStatus() {
+        const statusElement = document.getElementById('status-text');
+        if (!statusElement) return;
+
+        const statuses = [
+            "obsessing over every pixel",
+            "searching for the perfect UI animation",
+            "re-organizing my pokemon cards"
+        ];
+
+        // Pick a random status from the array
+        const randomIndex = Math.floor(Math.random() * statuses.length);
+        statusElement.textContent = statuses[randomIndex];
+    }
 })();
