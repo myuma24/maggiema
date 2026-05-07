@@ -187,7 +187,7 @@
             setActiveByHash(id);
         }
     }
-
+    
     function initPageScripts() {
         navLinksRef = Array.from(document.querySelectorAll(".nav-link"));
         sectionsRef = Array.from(document.querySelectorAll("[data-section]"));
@@ -223,7 +223,7 @@
             const totalCards = cards.length;
 
             function updateStackVisuals() {
-                cards.forEach((card, i) => {
+                cards.forEach((card) => {
                     const cardIndex = parseInt(card.style.getPropertyValue('--index'));
                     if (cardIndex > currentIndex && !card.classList.contains('top')) {
                         const depth = cardIndex - currentIndex;
@@ -235,12 +235,9 @@
                 });
             }
 
-            updateStackVisuals();
-
-            nextBtn.onclick = () => {
+            function handleNext() {
                 if (currentIndex === totalCards - 1) {
                     currentIndex = 0;
-                    // Smoothly reset cards with a staggered delay to prevent flashing
                     cards.forEach((card, i) => {
                         setTimeout(() => {
                             card.classList.remove('top');
@@ -255,13 +252,32 @@
                 }
 
                 textContents.forEach(content => {
-                    content.classList.toggle('active', parseInt(content.dataset.card) === currentIndex);
+                    content.classList.remove('active');
+                    if (parseInt(content.dataset.card) === currentIndex) {
+                        setTimeout(() => content.classList.add('active'), 10);
+                    }
                 });
 
                 if (counter) counter.textContent = `${currentIndex + 1} / ${totalCards}`;
                 nextBtn.textContent = buttonLabels[currentIndex];
-            };
+            }
+
+            nextBtn.onclick = handleNext;
+            stack.onclick = handleNext;
+
+            updateStackVisuals();
         }
+
+        const embeds = document.querySelectorAll('.spotify-embed');
+        embeds.forEach(iframe => {
+            if (iframe.complete || iframe.readyState === 'complete') {
+                iframe.classList.add('loaded');
+            } else {
+                iframe.addEventListener('load', () => {
+                    iframe.classList.add('loaded');
+                });
+            }
+        });
 
         if (!pointerListenerAttached) {
             pointerListenerAttached = true;

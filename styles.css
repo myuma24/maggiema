@@ -545,15 +545,12 @@ ul li {
 }
 
 .fark-initial-research {
-    /* 1. The Breakout Logic */
     width: 1200px;
     max-width: 100vw;
-    /* Keeps it responsive on mobile */
     position: relative;
     left: 50%;
     transform: translateX(-50%);
 
-    /* 2. Layout & Centering */
     display: flex;
     justify-content: center;
     margin-top: 32px;
@@ -825,11 +822,9 @@ ul li {
     }
 }
 
-/* No opacity: 0 here; the iframe just appears when ready */
 .spotify-wrapper iframe {
     position: relative;
     z-index: 1;
-    /* Sits on top of the shimmer */
     display: block;
     width: 100%;
     height: 100%;
@@ -837,14 +832,43 @@ ul li {
 
 @media (max-width: 768px) {
     .about-interactive-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
+        gap: 30px;
     }
 
     .card-stack {
-        width: 280px;
-        height: 360px;
+        width: 250px;
+        height: 320px;
+    }
+
+    .stack-controls {
+        margin-top: 20px;
+    }
+
+    .about-text-box {
+        height: auto;
+        min-height: unset;
+    }
+
+    .text-content.active {
+        position: relative;
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .about-interactive-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        max-height: none;
+        height: auto;
+    }
+
+    .card-stack {
+        width: 200px;
+        height: 270px;
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 
