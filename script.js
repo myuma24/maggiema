@@ -204,34 +204,83 @@
             DNLink.onclick = () => window.open("https://digitalnest.org", "_blank", "noopener");
         }
 
+        const stack = document.getElementById('cardStack');
+        const nextBtn = document.getElementById('stackNextBtn');
+        const counter = document.getElementById('cardCounter');
+        const textContents = document.querySelectorAll('.text-content');
+        const cards = document.querySelectorAll('.stack-card');
+
+        if (stack && nextBtn) {
+            const buttonLabels = [
+                "My Education",
+                "My Experience",
+                "My Hobbies",
+                "My Philosophy",
+                "Back to Intro"
+            ];
+
+            let currentIndex = 0;
+            const totalCards = cards.length;
+
+            function updateStackVisuals() {
+                cards.forEach((card, i) => {
+                    const cardIndex = parseInt(card.style.getPropertyValue('--index'));
+                    if (cardIndex > currentIndex && !card.classList.contains('top')) {
+                        const depth = cardIndex - currentIndex;
+                        const rotation = depth * 4;
+                        card.style.transform = `rotate(-${rotation}deg)`;
+                    } else if (cardIndex === currentIndex && !card.classList.contains('top')) {
+                        card.style.transform = 'rotate(0deg)';
+                    }
+                });
+            }
+
+            updateStackVisuals();
+
+            nextBtn.onclick = () => {
+                if (currentIndex === totalCards - 1) {
+                    currentIndex = 0;
+                    // Smoothly reset cards with a staggered delay to prevent flashing
+                    cards.forEach((card, i) => {
+                        setTimeout(() => {
+                            card.classList.remove('top');
+                            updateStackVisuals();
+                        }, (totalCards - i) * 100);
+                    });
+                } else {
+                    const topCard = cards[currentIndex];
+                    topCard.classList.add('top');
+                    currentIndex++;
+                    updateStackVisuals();
+                }
+
+                textContents.forEach(content => {
+                    content.classList.toggle('active', parseInt(content.dataset.card) === currentIndex);
+                });
+
+                if (counter) counter.textContent = `${currentIndex + 1} / ${totalCards}`;
+                nextBtn.textContent = buttonLabels[currentIndex];
+            };
+        }
+
         if (!pointerListenerAttached) {
             pointerListenerAttached = true;
-
-            let px = 0.5;
-            let py = 0.5;
-            let raf = null;
-
-            window.addEventListener(
-                "pointermove",
-                (e) => {
-                    px = e.clientX / window.innerWidth;
-                    py = e.clientY / window.innerHeight;
-
-                    if (raf) return;
-
-                    raf = requestAnimationFrame(() => {
-                        if (moveLayersRef.length) {
-                            moveLayersRef.forEach(({ el, intensity }) => {
-                                const moveX = intensity * px - intensity / 2;
-                                const moveY = intensity * py - intensity / 2;
-                                el.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
-                            });
-                        }
-                        raf = null;
-                    });
-                },
-                { passive: true }
-            );
+            let px = 0.5, py = 0.5, raf = null;
+            window.addEventListener("pointermove", (e) => {
+                px = e.clientX / window.innerWidth;
+                py = e.clientY / window.innerHeight;
+                if (raf) return;
+                raf = requestAnimationFrame(() => {
+                    if (moveLayersRef.length) {
+                        moveLayersRef.forEach(({ el, intensity }) => {
+                            const moveX = intensity * px - intensity / 2;
+                            const moveY = intensity * py - intensity / 2;
+                            el.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+                        });
+                    }
+                    raf = null;
+                });
+            }, { passive: true });
         }
 
         if (!scrollListenerAttached) {
