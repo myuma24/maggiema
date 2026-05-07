@@ -510,7 +510,15 @@
             "re-organizing my pokemon cards",
             "debating if I should learn React",
             "hunting for a missing curly bracket",
-            "missing the davis arboretum"
+            "attempting to debug a layout issue that mysteriously resolved itself",
+            "contemplating the meaning of life through CSS",
+            "trying to find a good excuse to take a break",
+            "looking for that one line of code I just wrote",
+            "attempting to explain to my non-tech friends what I do for a living",
+            "attempting my 30th honor mode run in Baldur's Gate 3",
+            "looking at pokemon cards on TCGPlayer for research purposes",
+            "tackling my 12th Rolife build",
+            "balding on baldurs gate honor mode"
         ];
 
         // Pick a random status from the array
