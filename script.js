@@ -204,7 +204,6 @@
             DNLink.onclick = () => window.open("https://digitalnest.org", "_blank", "noopener");
         }
 
-
         const stack = document.getElementById('cardStack');
         const nextBtn = document.getElementById('stackNextBtn');
         const counter = document.getElementById('cardCounter');
@@ -224,7 +223,7 @@
             const totalCards = cards.length;
 
             function updateStackVisuals() {
-                cards.forEach((card, i) => {
+                cards.forEach((card) => {
                     const cardIndex = parseInt(card.style.getPropertyValue('--index'));
                     if (cardIndex > currentIndex && !card.classList.contains('top')) {
                         const depth = cardIndex - currentIndex;
@@ -236,12 +235,9 @@
                 });
             }
 
-            updateStackVisuals();
-
-            nextBtn.onclick = () => {
+            function handleNext() {
                 if (currentIndex === totalCards - 1) {
                     currentIndex = 0;
-                    // Smoothly reset cards with a staggered delay to prevent flashing
                     cards.forEach((card, i) => {
                         setTimeout(() => {
                             card.classList.remove('top');
@@ -261,7 +257,12 @@
 
                 if (counter) counter.textContent = `${currentIndex + 1} / ${totalCards}`;
                 nextBtn.textContent = buttonLabels[currentIndex];
-            };
+                updateCurrentStatus();
+            }
+
+            nextBtn.onclick = handleNext;
+            stack.onclick = handleNext;
+            updateStackVisuals();
         }
 
         if (!pointerListenerAttached) {
@@ -288,6 +289,7 @@
             scrollListenerAttached = true;
             window.addEventListener("scroll", updateActiveSection, { passive: true });
         }
+
         updateCurrentStatus();
         updateActiveSection();
     }

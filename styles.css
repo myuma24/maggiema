@@ -745,11 +745,19 @@ ul li {
 .about-text-box {
     flex: 1;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .text-content {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .text-content p {
@@ -757,8 +765,18 @@ ul li {
 }
 
 .text-content.active {
-    display: block;
+    position: relative;
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.about-interactive-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+    margin-top: 40px;
+    min-height: 420px;
 }
 
 .text-content.active .cs-eyebrow,
