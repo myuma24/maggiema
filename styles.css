@@ -797,7 +797,7 @@ ul li {
 }
 
 .stack-controls {
-    margin-top: 40px;
+    margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid var(--darker-stroke-color);
     display: flex;
