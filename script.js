@@ -518,7 +518,7 @@
             "attempting my 30th honor mode run in Baldur's Gate 3",
             "looking at pokemon cards on TCGPlayer for research purposes",
             "tackling my 12th Rolife build",
-            "balding on baldurs gate honor mode"
+            "balding on baldurs gate",
         ];
 
         // Pick a random status from the array
