@@ -504,9 +504,20 @@
             "looking for that one line of code I just wrote",
             "attempting to explain to my non-tech friends what I do for a living",
             "attempting my 30th honor mode run in Baldur's Gate 3",
-            "looking at pokemon cards on TCGPlayer for research purposes",
+            "obsessing over every pixel",
+            'looking at pokemon cards on TCGPlayer for "research purposes"',
             "tackling my 12th Rolife build",
             "balding on baldurs gate",
+            "trying to five-stack aram mayhem in League of Legends",
+            "deciding if I should start a new farm in Stardew Valley",
+            "jump roping in my backyard to stay active",
+            "debating if I should get a switch just to play Tomodachi Life",
+            "hard grinding the crimson witch domain",
+            "watching tanks for nothin on Youtube",
+            "figuring out what to have for lunch",
+            "obsessing over every pixel",
+            "hunting for the next card show",
+            "hunting for new things to try in figma"
         ];
 
         // Pick a random status from the array
