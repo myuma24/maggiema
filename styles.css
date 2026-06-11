@@ -27,6 +27,10 @@ html:not(.theme-ready) * {
     transition: none !important;
 }
 
+html, body {
+    cursor: url('images/Pointer.svg'), auto;
+}
+
 
 body {
     font-family: "Nunito Sans", sans-serif;
@@ -1677,4 +1681,180 @@ ul li {
         min-width: 250px;
         margin: auto;
     }
+}
+
+/* CONSTRUCTION ------------------------------------------------------------- */
+.more-work-section {
+    padding-bottom: 60px;
+}
+
+.section-divider {
+    border: 0;
+    height: 1px;
+    background: var(--stroke-color);
+    margin-bottom: 40px;
+}
+
+.more-work-title {
+    font-family: "Google Sans", sans-serif;
+    font-size: 1.8rem;
+    color: var(--h-font-color);
+    margin-bottom: 30px;
+}
+
+/* Grid Layout */
+.more-work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Mini Cards */
+.work-card-mini {
+    background: var(--sub-bg-color);
+    border: 1px solid var(--stroke-color);
+    border-radius: 16px;
+    padding: 24px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.work-card-mini:hover {
+    transform: translateY(-4px);
+    border-color: var(--darker-stroke-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* Card Typography & Tags */
+.card-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--tag-background);
+    color: var(--tag-font);
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+}
+
+.work-card-mini h3 {
+    font-family: "Google Sans", sans-serif;
+    font-size: 1.3rem;
+    color: var(--h-font-color);
+    margin: 0 0 10px 0;
+}
+
+.work-card-mini p {
+    font-size: 0.95rem;
+    color: var(--p-font-color);
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+    flex-grow: 1; /* Pushes the view link to the bottom if text lengths vary */
+}
+
+.view-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--secondary-font);
+    transition: gap 0.2s ease;
+}
+
+/* Dark Mode Tweaks if necessary */
+html.dark-mode .work-card-mini {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Under Construction Component */
+.construction-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.construction-card {
+    background: var(--sub-bg-color);
+    border: 1px solid var(--stroke-color);
+    border-radius: 24px;
+    max-width: 540px;
+    padding: 48px 32px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+}
+
+/* Icon Wrap & Pulse Animations */
+.construction-icon-wrapper {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.construction-icon {
+    width: 28px;
+    height: 28px;
+    z-index: 2;
+}
+
+.construction-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 16px;
+    opacity: 0.15;
+    animation: construct-pulse-ring 2.5s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
+    z-index: 1;
+}
+
+/* Typography tokens match */
+.construction-title {
+    font-family: "Google Sans", sans-serif;
+    font-size: 1.6rem;
+    color: var(--h-font-color);
+    margin: 0 0 12px 0;
+}
+
+.construction-text {
+    font-size: 1rem;
+    color: var(--p-font-color);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Keyframes for soft background pulse */
+@keyframes construct-pulse-ring {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.25;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+}
+
+/* Native dark mode overrides */
+html.dark-mode .construction-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: var(--stroke-color);
 }
